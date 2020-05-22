@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src='https://jitsi.cimaa.pt/external_api.js'></script>
+</head>
+<body>
+    <h1>Hello</h1>
+    <button id="start" type="button">Start</button>
+
+    <div id="jitsi-container"></div>
+
+    <script>
+        var button = document.querySelector('#start');
+        var container = document.querySelector('#jitsi-container');
+        var api = null;
+
+        button.addEventListener('click', () => {
+            var domain = "jitsi.cimaa.pt";
+            var options = {
+                "roomName": "TestDemo1234567890",
+                "parentNode": container,
+                "width": 1280,
+                "height": 720,
+            };
+            api = new JitsiMeetExternalAPI(domain, options);
+        });
+
+    </script>
+</body>
+</html>
