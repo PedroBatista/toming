@@ -1,17 +1,30 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <button id="start" type="button" @click="start">Start</button>
+    <JitsiExternalApi :options="options" ref="jitsi" />
   </div>
 </template>
 
 <script>
-  import HelloWorld from './components/HelloWorld.vue'
+  import JitsiExternalApi from "./components/JitsiExternalApi";
 
   export default {
     name: 'App',
     components: {
-      HelloWorld
+      JitsiExternalApi
+    },
+    data: () => ({
+      options: {
+        "roomName": "TestDemo1234567890",
+        "width": 1280,
+        "height": 720,
+      }
+    }),
+    methods: {
+      start: function () {
+        this.$refs.jitsi.start()
+      }
     }
   }
 </script>
