@@ -1,3 +1,3 @@
 # toming
 
-Teams + Zoom + Tunning = toming
+Teams + Zoom + Tuning = toming
