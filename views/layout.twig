@@ -3,62 +3,16 @@
   <head>
     <title>{{ title | default('Toming') }}</title>
 
+    <!-- Bootstrap 4-->
+    <script src="/javascripts/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/bootstrap/bootstrap.min.css">
+    <script src="/javascripts/bootstrap/bootstrap.min.js" ></script>
+
     <link rel='stylesheet' href='/stylesheets/style.css' />
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="/javascripts/lib-jitsi-meet.min.js" ></script>
+    <!-- <script src="/javascripts/lib-jitsi-meet.min.js" ></script> -->
 
 
-    <script>
-      JitsiMeetJS.init();
-
-      var options = {
-        hosts: {
-          domain: 'jitsi.cimaa.pt',
-        },
-      };
-
-      var connection = new JitsiMeetJS.JitsiConnection(null, null, options);
-
-      connection.addEventListener(JitsiMeetJS.events.connection.CONNECTION_ESTABLISHED, onConnectionSuccess);
-      connection.addEventListener(JitsiMeetJS.events.connection.CONNECTION_FAILED, onConnectionFailed);
-      connection.addEventListener(JitsiMeetJS.events.connection.CONNECTION_DISCONNECTED, disconnect);
-
-      connection.connect();
-/*
-      room = connection.initJitsiConference("conference1", confOptions);
-      room.on(JitsiMeetJS.events.conference.TRACK_ADDED, onRemoteTrack);
-      room.on(JitsiMeetJS.events.conference.CONFERENCE_JOINED, onConferenceJoined);
-*/
-      //JitsiMeetJS.createLocalTracks().then(onLocalTracks);
-
-      //room.join();
-//***************************************
-
-      function onConnectionSuccess() {
-        console.log("onConnectionSuccess")
-        const room = connection.initJitsiConference("TestDemo1234567890", confOptions);
-        room.on(JitsiMeetJS.events.conference.TRACK_ADDED, onRemoteTrack);
-        room.on(JitsiMeetJS.events.conference.CONFERENCE_JOINED, onConferenceJoined);
-        room.join();
-      }
-
-      function onConnectionFailed() {
-        console.log("onConnectionFailed")
-      }
-
-      function disconnect() {
-        console.log("disconnect")
-      }
-
-      function onRemoteTrack() {
-        console.log("onRemoteTrack")
-      }
-
-      function onConferenceJoined() {
-        console.log("onConferenceJoined")
-      }
-    </script>
 
   </head>
   <body>
