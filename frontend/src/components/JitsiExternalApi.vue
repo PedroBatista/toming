@@ -18,6 +18,8 @@
       document.head.appendChild(jitsiExternalApi)
     },
     methods: {
+      // https://stackoverflow.com/questions/40957008/how-to-access-to-a-child-method-from-the-parent-in-vue-js/40957171
+
       start () {
         let container = document.querySelector('#jitsi-container')
         let domain = "jitsi.cimaa.pt"

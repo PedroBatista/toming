@@ -4,7 +4,9 @@ import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
-  const routes = [
+// registo, login, listar salas, sala, etc.
+
+const routes = [
   {
     path: '/',
     name: 'Home',

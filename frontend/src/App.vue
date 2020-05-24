@@ -9,8 +9,37 @@
       </router-link>
     </div>
     <router-view />
+
+    <b-button @click="start">Start</b-button>
+
+    <JitsiExternalApi
+      style="width: 1280px; height: 720px;"
+      :options="options"
+      ref="jitsi"
+    />
   </div>
 </template>
+
+<script>
+  import JitsiExternalApi from "./components/JitsiExternalApi";
+
+  export default {
+    name: 'App',
+    components: {
+      JitsiExternalApi
+    },
+    data: () => ({
+      options: {
+        "roomName": "TestDemo1234567890"
+      }
+    }),
+    methods: {
+      start () {
+        this.$refs.jitsi.start()
+      }
+    }
+  }
+</script>
 
 <style>
 #app {
