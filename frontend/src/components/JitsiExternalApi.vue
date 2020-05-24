@@ -1,5 +1,5 @@
 <template>
-  <div id="jitsi-container"></div>
+  <div id="jitsi-container" />
 </template>
 
 <script>
