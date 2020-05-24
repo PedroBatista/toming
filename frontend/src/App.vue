@@ -2,12 +2,14 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <button id="start" type="button" @click="start">Start</button>
-    <JitsiExternalApi :options="options" ref="jitsi" />
+    <JitsiExternalApi style="width: 1280px; height: 720px;" :options="options" ref="jitsi" />
   </div>
 </template>
 
 <script>
   import JitsiExternalApi from "./components/JitsiExternalApi";
+
+  // registo, login, listar salas, sala, etc.
 
   export default {
     name: 'App',
@@ -16,13 +18,11 @@
     },
     data: () => ({
       options: {
-        "roomName": "TestDemo1234567890",
-        "width": 1280,
-        "height": 720,
+        "roomName": "TestDemo1234567890"
       }
     }),
     methods: {
-      start: function () {
+      start () {
         this.$refs.jitsi.start()
       }
     }

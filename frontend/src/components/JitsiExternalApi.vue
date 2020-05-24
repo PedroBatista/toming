@@ -18,12 +18,14 @@
       document.head.appendChild(jitsiExternalApi)
     },
     methods: {
-      start: function () {
+      start () {
         let container = document.querySelector('#jitsi-container')
         let domain = "jitsi.cimaa.pt"
         let options = {
           ...this.options,
           "parentNode": container,
+          "width": "100%",
+          "height": "100%"
         }
 
         // eslint-disable-next-line no-undef
