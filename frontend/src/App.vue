@@ -10,7 +10,12 @@
     </div>
     <router-view />
 
-    <b-button @click="start">Start</b-button>
+    <b-button
+      variant="success"
+      @click="start"
+    >
+      Start
+    </b-button>
 
     <JitsiExternalApi
       style="width: 1280px; height: 720px;"
