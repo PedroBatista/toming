@@ -12,13 +12,14 @@
       }
     },
     data: () => ({
+      scriptLoaded: false,
       started: false
     }),
     mounted() {
       // https://stackoverflow.com/questions/45047126/how-to-add-external-js-scripts-to-vuejs-components
       this.$loadScript("https://jitsi.cimaa.pt/external_api.js")
         .then(() => {
-          // Script is loaded, do something
+          this.scriptLoaded = true
         })
         .catch(() => {
           // Failed to fetch script
@@ -29,18 +30,12 @@
     },
     beforeDestroy() {
       this.$unloadScript("https://jitsi.cimaa.pt/external_api.js")
-        .then(() => {
-          // Script was unloaded successfully
-        })
-        .catch(() => {
-          // Script couldn't be found to unload; make sure it was loaded and that you passed the same URL
-        });
     },
     methods: {
       // https://stackoverflow.com/questions/40957008/how-to-access-to-a-child-method-from-the-parent-in-vue-js/40957171
 
       start () {
-        if (this.started === true)
+        if (this.scriptLoaded === false || this.started === true)
           return
 
         let container = document.querySelector('#jitsi-container')
