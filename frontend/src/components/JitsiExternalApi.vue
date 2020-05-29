@@ -17,7 +17,7 @@
     }),
     mounted() {
       // https://stackoverflow.com/questions/45047126/how-to-add-external-js-scripts-to-vuejs-components
-      this.$loadScript("https://jitsi.cimaa.pt/external_api.js")
+      this.$loadScript(process.env.VUE_APP_JITSI_EXTERNAL_API)
         .then(() => {
           this.scriptLoaded = true
         })
@@ -29,7 +29,7 @@
       document.head.appendChild(jitsiExternalApi)*/
     },
     beforeDestroy() {
-      this.$unloadScript("https://jitsi.cimaa.pt/external_api.js")
+      this.$unloadScript(process.env.VUE_APP_JITSI_EXTERNAL_API)
     },
     methods: {
       // https://stackoverflow.com/questions/40957008/how-to-access-to-a-child-method-from-the-parent-in-vue-js/40957171
@@ -39,7 +39,7 @@
           return
 
         let container = document.querySelector('#jitsi-container')
-        let domain = "jitsi.cimaa.pt"
+        let domain = process.env.VUE_APP_JITSI_SERVER
         let options = {
           ...this.options,
           "parentNode": container,
