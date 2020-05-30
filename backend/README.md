@@ -11,6 +11,8 @@ npm run dev
 ```
 
 ### Estrutura
+`/public` Ficheiros públicos.
+
 `/src`
 
 `--/database/` (WIP)
