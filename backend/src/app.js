@@ -3,8 +3,20 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
 
-var indexRouter = require('./routes/index');
+require('dotenv').config();
+
+// Use native ES6 Promises since mongoose's are deprecated.
+mongoose.Promise = global.Promise;
+
+// Connect to the database
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// Fail on connection error.
+mongoose.connection.on('error', error => { throw error });
+
+var indexRouter = require('./routes');
 var usersRouter = require('./routes/users');
 
 var app = express();
