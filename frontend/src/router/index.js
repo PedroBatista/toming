@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 Vue.use(VueRouter)
 
 // registo, login, listar salas, sala, etc.
+// Home, login, registo, home/dashboard interna depois login com sucesso, sala, sala de espera, etc.
 
 const routes = [
   {
