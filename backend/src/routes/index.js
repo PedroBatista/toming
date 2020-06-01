@@ -12,6 +12,8 @@ router.get('/external-api', function (req, res, next) {
 });
 
 router.get('/jwt', function (req, res, next) {
+  // https://github.com/jitsi/lib-jitsi-meet/blob/master/doc/tokens.md
+  // https://github.com/auth0/node-jsonwebtoken
   /*{
     "kid": "jitsi/custom_key_name",
     "typ": "JWT",
