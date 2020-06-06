@@ -19,6 +19,7 @@
 
     <JitsiExternalApi
       style="width: 1280px; height: 720px;"
+      room-display-name="Test Room Subject"
       :options="options"
       ref="jitsi"
     />
@@ -35,7 +36,8 @@
     },
     data: () => ({
       options: {
-        "roomName": "TestDemo1234567890"
+        "roomName": "TestDemo1234567890",
+        "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb250ZXh0Ijp7InVzZXIiOnsiYXZhdGFyIjoiaHR0cHM6Ly9jdXRlY2F0c2hxLmNvbS93cC1jb250ZW50L3VwbG9hZHMvMjAxNC8wNS9Penp5LURhdGluZy1Qcm9maWxlLVBob3RvLi1IZWxsby1MYWRpZXMuanBnIiwibmFtZSI6IkRhbmllbCBNYXJtZWxvIn19LCJhdWQiOiJ0b21pbmctdXNlcnMiLCJpc3MiOiJ0b21pbmciLCJzdWIiOiJqaXRzaS5jaW1hYS5wdCIsInJvb20iOiJUZXN0RGVtbzEyMzQ1Njc4OTAiLCJpYXQiOjE1OTE0MDE4MjcsImV4cCI6MTU5MTQwMjcyN30.zw1yJuIZ24WJHQA0AXvpKqBPzTuI_spKQb7nvbcqWSc"
       }
     }),
     methods: {
