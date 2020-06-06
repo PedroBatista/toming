@@ -1,5 +1,5 @@
 <template>
-  <div id="jitsi-container"/>
+  <div id="jitsi-container" />
 </template>
 
 <script>
@@ -65,7 +65,10 @@
 
         // eslint-disable-next-line no-undef
         this.api = new JitsiMeetExternalAPI(domain, options)
-        this.api.executeCommand('subject', this.roomDisplayName);
+
+        if (this.roomDisplayName != undefined)
+          this.api.executeCommand('subject', this.roomDisplayName);
+
         this.api.on('readyToClose', () => {
           this.api.dispose()
           this.onCall = false
