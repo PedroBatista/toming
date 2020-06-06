@@ -1,6 +1,6 @@
-var express = require('express');
-var jwt = require('jsonwebtoken');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const jitsiToken = require('../services/jiti-token-generation');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -12,42 +12,7 @@ router.get('/external-api', function (req, res, next) {
 });
 
 router.get('/jwt', function (req, res, next) {
-  // https://github.com/jitsi/lib-jitsi-meet/blob/master/doc/tokens.md
-  // https://github.com/auth0/node-jsonwebtoken
-  /*{
-    "kid": "jitsi/custom_key_name",
-    "typ": "JWT",
-    "alg": "RS256"
-  }*/
-  let key = "shhhhhhh";
-
-  let payload = {
-    "context": {
-      "user": {
-        "avatar": "https:/gravatar.com/avatar/abc123",
-        "name": "John Doe",
-        "email": "jdoe@example.com",
-        "id": "abcd:a1b2c3-d4e5f6-0abc1-23de-abcdef01fedcba"
-      },
-      "group": "a123-123-456-789"
-    },
-    "aud": "jitsi",
-    "iss": "my_client",
-    "sub": "meet.jit.si",
-    "room": "*",
-    "exp": 1500006923
-  };
-
-  let options = {
-    algorithm: 'HS256',
-    //expiresIn: '1h',
-    header: {
-      kid: 'jitsi/custom_key_name'
-    }
-  };
-
-  let token = jwt.sign(payload, key, options);
-  //let token = jwt.sign(payload, privateKey, options);
+  const token = jitsiToken.generate("Daniel Marmelo", "https://cutecatshq.com/wp-content/uploads/2014/05/Ozzy-Dating-Profile-Photo.-Hello-Ladies.jpg", "TestDemo1234567890");
   res.send(token);
 });
 
