@@ -11,6 +11,8 @@ require('dotenv').config();
 mongoose.Promise = global.Promise;
 
 // Connect to the database
+
+console.log("Mongo URI: " + process.env.MONGO_URI)
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 let db = mongoose.connection;
@@ -33,6 +35,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//AUTHENTICATION:
+//https://github.com/hagopj13/node-express-mongoose-boilerplate/blob/master/src/routes/v1/user.route.js
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
