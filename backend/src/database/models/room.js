@@ -1,13 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+const MUUID = require('uuid-mongodb');
 
 var room = new Schema({
-  //se calhar o id gerado pelo MongoDb é suficiente
-  //id : { type: Date, default: gerar uuid }, //nao sei se este ID pode ser o do Jitsi
+  _id : { type: String, default: MUUID.v4() },
   subject:  { type: String, required: true  },
-  author: {type: Schema.Types.ObjectID, ref: "User"},
-
-  //created_at: { type: Date, default: Date.now },
+  author: {type: Schema.Types.ObjectID, ref: "User", required: true},
 
   //Para depois,
   //allowed_users: [{type: Schema.Types.ObjectID, ref: "User"}],
@@ -21,6 +19,6 @@ const options = {
 //make the schema as a new instance of a mongoose schema, using our definition and options
 const roomSchema = new mongoose.Schema(room, options)
 
-//export that boye
+
 module.exports = mongoose.model('Room', roomSchema)
 

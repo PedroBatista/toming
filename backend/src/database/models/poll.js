@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var poll = new Schema({
 
   question:  { type: String, required: true  },
-  author: {type: Schema.Types.ObjectID, ref: "User"},
+  author: {type: Schema.Types.ObjectID, ref: "User", required: true},
 
   already_voted_users: [{type: Schema.Types.ObjectID, ref: "User"}],
 

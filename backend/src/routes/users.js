@@ -8,12 +8,19 @@ router.get('/', async function(req, res, next) {
   //query the DB of all users
   await User.find().exec()
     .then(users => {
+
+      for (var i = 0; i < users.length; i++) {
+        users[i].password = "";
+      }
+
       res.json({ users: users})
     })
     .catch(err => {
       res.json({ error: err, message: "Could not retrieve users"}).status(500)
     })
 });
+
+
 
 //make a new boy
 router.post('/', async function(req, res, next) {
@@ -37,6 +44,7 @@ router.get('/:id', async function(req, res, next) {
   //find this sneaky boye
   await User.findById(req.params.id).exec()
     .then(user => {
+      user.password = "";
       res.json({ user: user})
     })
     .catch(err => {

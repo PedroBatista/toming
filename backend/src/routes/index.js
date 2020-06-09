@@ -3,16 +3,22 @@ const router = express.Router();
 const jitsiToken = require('../services/jiti-token-generation');
 
 let RoomModel = require("../database/models/room.js")
-
+let User = require("../database/models/user.js")
 
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', async function (req, res, next) {
+
+  var u = await User.findOne({ email: 'luvl@mail.com'}).exec();
+
+  console.log("User: " + u)
+
 
   var r = new RoomModel();
-  r.title = "Global Lobotomy";
-
+  r.subject = "Global Lobotomy 2";
+  r.author = u;
   r.save();
+
 
   res.render('index', {title: 'Express'});
 });
