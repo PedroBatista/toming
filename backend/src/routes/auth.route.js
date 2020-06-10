@@ -3,6 +3,7 @@ const httpStatus = require('http-status');
 const {User} = require('../database/models')
 const authValidation = require('../validations/auth.validation');
 
+let SessionModel = require("../database/models/session")
 const router = express.Router();
 
 // https://mannhowie.com/express-validation
@@ -74,8 +75,28 @@ router.post('/login', async (req, res, next) => {
     }
 
     // TODO Auth
+    user.password = "";
+    var sess = new SessionModel();
+    sess.user = user;
+    //save it in the DB
+    await sess.save()
+      .then(sess => {
+        //send a 201 and the new resource
+        let options = {
+          maxAge: 1000 * 60 * 1440, // would expire after 24 hours
+          httpOnly: true, // The cookie only accessible by the web server
+        }
+        // Set cookie
+        res.cookie('sessionid', sess._id, options) // options is optional
 
-    return res.send({ user });
+        res.status(201).json({ data: sess })
+      })
+      .catch(err => {
+        let errStatus = err.name === 'ValidationError' ? 400 : 500
+        res.status(errStatus).json({err: err})
+      })
+
+    //return res.send({ user });
   }
 );
 
