@@ -21,8 +21,9 @@ db.on('error', error => { throw error });
 // Connected successfully.
 db.once('open', () => { console.log('mongoose connected!') });
 
-var indexRouter = require('./routes');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes');
+const authRouter = require('./routes/auth.route');
+const usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -40,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //https://github.com/hagopj13/node-express-mongoose-boilerplate/blob/master/src/routes/v1/user.route.js
 
 app.use('/', indexRouter);
+app.use('/auth', authRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
