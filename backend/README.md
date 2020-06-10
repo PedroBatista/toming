@@ -22,6 +22,7 @@ src\
   |--index.js      # Indice das rotas da API.
   |--user.js       # Rotas específicas de utilizadores.
  |--services\      # Serviços utilitários.
+ |--utils\         # Utilitários.
  |--validations\   # Objetos para validação dos pedidos à API.
  |--views\         # Chamiços do @PedroBatista.
  |--app.js         # Aplicação Express.js
