@@ -5,8 +5,7 @@ const bcrypt = require('bcryptjs');
 //const { toJSON, paginate } = require('./plugins');
 //const { roles } = require('../config/roles');
 
-const userSchema = mongoose.Schema(
-  {
+const userSchema = mongoose.Schema({
     name: {
       type: String,
       required: true,
@@ -36,11 +35,10 @@ const userSchema = mongoose.Schema(
       },
       private: true, // used by the toJSON plugin
     },
-    avatar_photo :{
+    avatar_photo: {
       //upload para MongoDB
 
-    }
-    ,
+    },
   },
   {
     timestamps: true,
@@ -58,7 +56,7 @@ const userSchema = mongoose.Schema(
  * @returns {Promise<boolean>}
  */
 userSchema.statics.isEmailTaken = async function (email, excludeUserId) {
-  const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
+  const user = await this.findOne({email, _id: {$ne: excludeUserId}});
   return !!user;
 };
 

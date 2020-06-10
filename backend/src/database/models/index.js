@@ -1,11 +1,4 @@
-// Import all the models.
-const User = require('./user')
-const Room = require('./room')
-const Pool = require('./poll')
-
-// Export them in a bundle
-module.exports = {
-  User,
-  Room,
-  Pool
-}
+module.exports.User = require('./user');
+module.exports.Room = require('./room');
+module.exports.Pool = require('./poll');
+module.exports.Session = require('./session');

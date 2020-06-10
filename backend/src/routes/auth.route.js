@@ -1,11 +1,13 @@
 const express = require('express');
 const httpStatus = require('http-status');
-const {User} = require('../database/models');
+const {User, Session} = require('../database/models');
 const validate = require('../middleware/validate');
 const authValidation = require('../validations/auth.validation');
 
-let SessionModel = require("../database/models/session")
 const router = express.Router();
+
+//AUTHENTICATION:
+//https://github.com/hagopj13/node-express-mongoose-boilerplate/blob/master/src/routes/v1/user.route.js
 
 // https://mannhowie.com/express-validation
 // https://dev.to/nedsoft/central-error-handling-in-express-3aej
@@ -40,7 +42,7 @@ router.post('/login',
 
     // TODO Auth
     user.password = "";
-    var sess = new SessionModel();
+    var sess = new Session();
     sess.user = user;
     //save it in the DB
     await sess.save()
