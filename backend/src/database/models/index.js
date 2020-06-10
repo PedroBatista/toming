@@ -1,8 +1,11 @@
-//bring in the seperate models
+// Import all the models.
 const User = require('./user')
-//import other models in the same manner
+const Room = require('./room')
+const Pool = require('./poll')
 
-//export em in a good ol' bundle
+// Export them in a bundle
 module.exports = {
-  User
+  User,
+  Room,
+  Pool
 }
