@@ -28,7 +28,9 @@ router.get('/external-api', function (req, res, next) {
 });
 
 router.get('/jwt', function (req, res, next) {
-  const token = jitsiToken.generate("Daniel Marmelo", "https://cutecatshq.com/wp-content/uploads/2014/05/Ozzy-Dating-Profile-Photo.-Hello-Ladies.jpg", "TestDemo1234567890");
+  const token = jitsiToken.generate("Daniel Marmelo", "*");
+  //const token = jitsiToken.generate("Daniel Marmelo", "*", "https://cutecatshq.com/wp-content/uploads/2014/05/Ozzy-Dating-Profile-Photo.-Hello-Ladies.jpg");
+  //const token = jitsiToken.generate("Pedro Batista", "*", "https://sp.apolloboxassets.com/vendor/product/2019-01-15-09/productImages/rpE8tArray_4.jpg");
   res.send(token);
 });
 
