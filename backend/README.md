@@ -17,6 +17,7 @@ src\
  |--database\
   |--models\       # Modelos de dados para o Mongoose.
    |--index.js     # Indice dos modelos de base de dados.
+ |--middleware     # Middlewares.
  |--routes\        # Rotas da API. 
   |--index.js      # Indice das rotas da API.
   |--user.js       # Rotas específicas de utilizadores.
