@@ -1,6 +1,7 @@
 const express = require('express');
 const httpStatus = require('http-status');
-const {User} = require('../database/models')
+const {User} = require('../database/models');
+const validate = require('../middleware/validate');
 const authValidation = require('../validations/auth.validation');
 
 let SessionModel = require("../database/models/session")
@@ -8,34 +9,16 @@ const router = express.Router();
 
 // https://mannhowie.com/express-validation
 // https://dev.to/nedsoft/central-error-handling-in-express-3aej
+// https://dev.to/itnext/joi-awesome-code-validation-for-node-js-and-express-35pk
 
 router.post('/register',
-  async (req, res, next) => {
-    const userBody = req.body;
-
-    const {error, value} = authValidation.register.validate(userBody, {abortEarly: false});
-
-    if (error) {
-      const response = {
-        success: false,
-        message: "Invalid input data.",
-        details: error.details
-      }
-      return res.send(httpStatus.BAD_REQUEST, response);
-    }
-
-    if (await User.isEmailTaken(userBody.email)) {
-      const response = {
-        success: false,
-        message: "Email already taken."
-      }
-      return res.send(httpStatus.BAD_REQUEST, response);
-    }
-
-    return next();
-  },
+  validate(authValidation.register),
   async (req, res) => {
     const userBody = req.body;
+
+    if (await User.isEmailTaken(userBody.email)) {
+      return res.status(httpStatus.CONFLICT).json({error: "Email already taken."});
+    }
 
     const user = await User.create(userBody);
 
@@ -45,33 +28,14 @@ router.post('/register',
   }
 );
 
-
-router.post('/login', async (req, res, next) => {
-    const userBody = req.body;
-
-    const {error, value} = authValidation.login.validate(userBody, {abortEarly: false});
-
-    if (error) {
-      const response = {
-        success: false,
-        message: "Invalid input data.",
-        details: error.details
-      }
-      return res.send(httpStatus.BAD_REQUEST, response);
-    }
-
-    return next();
-  },
+router.post('/login',
+  validate(authValidation.login),
   async (req, res) => {
-    const { email, password } = req.body;
+    const {email, password} = req.body;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({email});
     if (!user || !(await user.isPasswordMatch(password))) {
-      const response = {
-        success: false,
-        message: "Incorrect email or password."
-      }
-      return res.send(httpStatus.UNAUTHORIZED, response);
+      return res.send(httpStatus.UNAUTHORIZED).json({error: "Incorrect email or password."});
     }
 
     // TODO Auth
@@ -89,7 +53,7 @@ router.post('/login', async (req, res, next) => {
         // Set cookie
         res.cookie('sessionid', sess._id, options) // options is optional
 
-        res.status(201).json({ data: sess })
+        res.status(201).json({data: sess})
       })
       .catch(err => {
         let errStatus = err.name === 'ValidationError' ? 400 : 500
