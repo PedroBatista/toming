@@ -1,6 +1,7 @@
 const Joi = require('@hapi/joi');
 const {pick} = require('lodash');
 const httpStatus = require('http-status');
+const ApiError = require('../utils/ApiError');
 
 const validate = (schema) => (req, res, next) => {
   const validSchema = pick(schema, ['params', 'query', 'body']);
@@ -11,7 +12,7 @@ const validate = (schema) => (req, res, next) => {
 
   if (error) {
     const errorMessage = error.details.map(d => d.message).join(', ');
-    return res.status(httpStatus.UNPROCESSABLE_ENTITY).json({error: errorMessage});
+    throw new ApiError(httpStatus.UNPROCESSABLE_ENTITY, errorMessage);
   }
 
   Object.assign(req, value);
