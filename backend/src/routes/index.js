@@ -1,20 +1,24 @@
 const express = require('express');
-const router = express.Router();
+const authRouter = require('./auth.route');
+const usersRouter = require('./users');
+const {User, Room} = require("../database/models");
 const jitsiToken = require('../services/jiti-token-generation');
 
-let RoomModel = require("../database/models/room.js")
-let User = require("../database/models/user.js")
+const router = express.Router();
+
+router.use('/auth', authRouter);
+router.use('/users', usersRouter);
 
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
 
-  var u = await User.findOne({ email: 'luvl@mail.com'}).exec();
+  var u = await User.findOne({email: 'luvl@mail.com'}).exec();
 
   console.log("User: " + u)
 
 
-  var r = new RoomModel();
+  var r = new Room();
   r.subject = "Global Lobotomy 2";
   r.author = u;
   r.save();

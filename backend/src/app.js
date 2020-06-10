@@ -1,8 +1,9 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const indexRouter = require('./routes');
 const mongoose = require('mongoose');
 
 require('dotenv').config();
@@ -11,21 +12,20 @@ require('dotenv').config();
 mongoose.Promise = global.Promise;
 
 // Connect to the database
-
 console.log("Mongo URI: " + process.env.MONGO_URI)
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 let db = mongoose.connection;
 // Fail on connection error.
-db.on('error', error => { throw error });
+db.on('error', error => {
+  throw error
+});
 // Connected successfully.
-db.once('open', () => { console.log('mongoose connected!') });
+db.once('open', () => {
+  console.log('mongoose connected!')
+});
 
-const indexRouter = require('./routes');
-const authRouter = require('./routes/auth.route');
-const usersRouter = require('./routes/users');
-
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,24 +33,19 @@ app.set('view engine', 'twig');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//AUTHENTICATION:
-//https://github.com/hagopj13/node-express-mongoose-boilerplate/blob/master/src/routes/v1/user.route.js
-
 app.use('/', indexRouter);
-app.use('/auth', authRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
