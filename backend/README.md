@@ -5,7 +5,7 @@
 npm install
 ```
 
-##### Para correr o servidor em modo de dev e com isso ele fazer reload automaticamente sempre que fazem uma alteração no código, na raiz do projeto:  
+##### Para correr o servidor em modo de dev e com isso ele fazer reload automaticamente sempre que fazem uma alteração no código:  
 ```
 npm run dev
 ```
