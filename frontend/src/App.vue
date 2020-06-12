@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <Navbar />
+    <router-view />
+
+    <!--<div id="nav">
       <router-link to="/">
         Home
       </router-link> |
@@ -10,14 +13,14 @@
     </div>
     <router-view />
 
-    <!--<b-button
+    <b-button
       variant="success"
       @click="start"
     >
       Start
-    </b-button>-->
+    </b-button>
 
-    <!--<JitsiExternalApi
+    <<JitsiExternalApi
       style="width: 1280px; height: 720px;"
       room-display-name="Test Room Subject"
       :options="options"
@@ -28,10 +31,12 @@
 
 <script>
   import JitsiExternalApi from "./components/JitsiExternalApi";
+  import Navbar from "./components/layout/Navbar";
 
   export default {
     name: 'App',
     components: {
+      Navbar,
       JitsiExternalApi
     },
     data: () => ({
