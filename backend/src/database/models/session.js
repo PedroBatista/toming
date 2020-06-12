@@ -5,7 +5,7 @@ const MUUID = require('uuid-mongodb');
 const session = new Schema({
   _id: {
     type: String,
-    default: MUUID.v4()
+    default: () => MUUID.v4()
   },
   user: {
     type: Schema.Types.ObjectID,
