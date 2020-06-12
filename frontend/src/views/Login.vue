@@ -54,7 +54,8 @@
       ...mapActions('auth', [
         'login'
       ]),
-      onSubmit() {
+      onSubmit(event) {
+        event.preventDefault()
         // Perform a simple validation that email and password have been typed in
         //if (this.usernameOrEmail !== '' && this.password !== '') {
           this.login({email: this.email, password: this.password})
