@@ -2,8 +2,10 @@ var express = require('express');
 const { User } = require('../database/models')
 var router = express.Router();
 
+const checkSession = require('../middleware/isValidSession');
+
 //get all users
-router.get('/', async function(req, res, next) {
+router.get('/', checkSession ,async function(req, res, next) {
 
   //query the DB of all users
   await User.find().exec()

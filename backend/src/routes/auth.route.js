@@ -57,7 +57,8 @@ router.post('/login',
           // Set cookie
           res.cookie('sessionid', sess._id, options) // options is optional
 
-          res.status(201).json({data: sess})
+
+          res.status(201).json(sess)
         })
         .catch(err => {
           let errStatus = err.name === 'ValidationError' ? 400 : 500
@@ -65,6 +66,22 @@ router.post('/login',
         })
 
       //return res.send({ user });
+    }
+  )
+);
+
+
+router.post('/session',
+  validate(authValidation.login),
+  catchAsync(async (req, res) => {
+
+    //TODO validar maxAge do Session
+    //ir à sessao, se existir envia-a, senão 401
+  //res.status(201).json(sess)
+
+
+    throw new ApiError(httpStatus.UNAUTHORIZED, "");
+
     }
   )
 );
