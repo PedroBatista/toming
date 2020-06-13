@@ -19,6 +19,7 @@
     }),
     mounted() {
       // https://stackoverflow.com/questions/45047126/how-to-add-external-js-scripts-to-vuejs-components
+      // The script is only mounted if not already present.
       this.$loadScript(process.env.VUE_APP_JITSI_EXTERNAL_API)
         .then(() => {
           this.scriptLoaded = true
@@ -33,7 +34,7 @@
     beforeDestroy() {
       if (this.api != undefined)
         this.api.dispose()
-      this.$unloadScript(process.env.VUE_APP_JITSI_EXTERNAL_API)
+      //this.$unloadScript(process.env.VUE_APP_JITSI_EXTERNAL_API)
     },
     methods: {
       // https://stackoverflow.com/questions/40957008/how-to-access-to-a-child-method-from-the-parent-in-vue-js/40957171

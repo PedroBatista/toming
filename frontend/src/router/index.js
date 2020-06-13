@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from "../views/Login";
+import Home from '../views/Home'
+import Login from '../views/Login'
+import Loading from '../views/Loading'
+import PageNotFound from '../views/PageNotFound'
+import Store from '../store'
 
 Vue.use(VueRouter)
 
@@ -12,7 +15,10 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      public: false,
+    }
   },
   {
     path: '/about',
@@ -25,7 +31,25 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      public: true,  // Allow access to even if not logged in
+      onlyWhenLoggedOut: true
+    }
+  },
+  {
+    path: '/loading',
+    component: Loading,
+    meta: {
+      public: true,
+    }
+  },
+  {
+    path: '*',
+    component: PageNotFound,
+    meta: {
+      public: true,
+    }
   }
 ]
 
@@ -33,6 +57,37 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  // TODO
+  //debugger
+  let validating = Store.getters["auth/validating"]
+  if (validating && to.path != '/loading')
+    return next({
+      path: '/loading',
+      query: {redirect: to.fullPath}  // Store the full path to redirect the user to after login
+    })
+
+  const isPublic = to.matched.some(record => record.meta.public)
+  const onlyWhenLoggedOut = to.matched.some(record => record.meta.onlyWhenLoggedOut)
+  let loggedIn = Store.getters["auth/loggedIn"]
+
+  if (!isPublic && !loggedIn) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    return next({
+      path: '/login',
+      query: {redirect: to.fullPath}  // Store the full path to redirect the user to after login
+    })
+  }
+
+  // Do not allow user to visit login page or register page if they are logged in
+  else if (loggedIn && onlyWhenLoggedOut) {
+    return next('/')
+  }
+
+  next();
 })
 
 export default router
