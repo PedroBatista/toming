@@ -71,7 +71,7 @@ router.post('/login',
 );
 
 
-router.post('/session',
+router.get('/session',
   validate(authValidation.login),
   catchAsync(async (req, res) => {
 
