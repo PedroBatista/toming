@@ -14,7 +14,7 @@ Vue.config.productionTip = false
 // Set the base URL of the API
 //ApiService.init(process.env.VUE_APP_API_BASE_URL)
 
-AuthService.validate()
+//AuthService.validate()
 // If token exists set header
 /*if (TokenService.getToken()) {
   ApiService.setHeader()
