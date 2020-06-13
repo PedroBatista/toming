@@ -74,13 +74,14 @@ router.post('/login',
 router.get('/session',
   catchAsync(async (req, res) => {
 
-    //TODO validar maxAge do Session
-    //ir à sessao, se existir envia-a, senão 401
-  //res.status(201).json(sess)
+    var sess = await Session.findById(req.cookies.sessionid).exec();
+    console.log("Sess: " + sess)
 
+    if(sess != null){
+      return res.status(200).json(sess)
+    }
 
     throw new ApiError(httpStatus.UNAUTHORIZED, "");
-
     }
   )
 );
