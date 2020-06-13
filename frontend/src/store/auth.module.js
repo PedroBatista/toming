@@ -36,7 +36,7 @@ const actions = {
 
     try {
       const response = await AuthService.login(email, password);
-      commit('loginSuccess', {userDetails: response.data.user}) // TODO
+      commit('loginSuccess', {userDetails: response.user}) // TODO
 
       // Redirect the user to the page he first tried to visit or to the home view
       router.push(router.history.current.query.redirect || '/');
