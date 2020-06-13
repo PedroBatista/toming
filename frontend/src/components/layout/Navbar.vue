@@ -43,7 +43,7 @@
 </template>
 
 <script>
-  import {mapGetters} from "vuex";
+  import {mapActions, mapGetters} from "vuex";
 
   export default {
     name: "Navbar",
@@ -54,9 +54,9 @@
       ])
     },
     methods: {
-      logout() {
-        // TODO
-      }
+      ...mapActions('auth', [
+        'logout'
+      ])
     }
   }
 </script>
