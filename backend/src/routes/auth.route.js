@@ -5,6 +5,7 @@ const validate = require('../middleware/validate');
 const authValidation = require('../validations/auth.validation');
 const catchAsync = require('../utils/catchAsync');
 const ApiError = require('../utils/ApiError');
+const  isValidSession =  require('../middleware/isValidSession');
 
 const router = express.Router();
 
@@ -71,10 +72,28 @@ router.post('/login',
 );
 
 
+
+router.get('/logout',isValidSession,
+  catchAsync(async (req, res) => {
+
+
+    await Session.findByIdAndRemove(req.cookies.sessionid).exec()
+      .then(() => {
+        //Session removido
+        res.status(204).json()
+      })
+      .catch(err => {
+        res.status(500).json({err: err})
+      })
+
+    }
+  )
+);
+
 router.get('/session',
   catchAsync(async (req, res) => {
 
-    var sess = await Session.findById(req.cookies.sessionid).exec();
+    var sess = await Session.findById(req.cookies.sessionid).populate("user").exec();
     console.log("Sess: " + sess)
 
     if(sess != null){
