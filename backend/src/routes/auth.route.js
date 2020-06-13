@@ -72,7 +72,6 @@ router.post('/login',
 
 
 router.get('/session',
-  validate(authValidation.login),
   catchAsync(async (req, res) => {
 
     //TODO validar maxAge do Session
