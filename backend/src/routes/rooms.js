@@ -62,7 +62,7 @@ router.get('/',isValidSession,
 );
 
 router.get('/:id',
-
+  isValidSession,
   catchAsync(async (req, res) => {
 
 
