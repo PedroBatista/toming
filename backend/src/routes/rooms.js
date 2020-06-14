@@ -7,6 +7,7 @@ const catchAsync = require('../utils/catchAsync');
 const ApiError = require('../utils/ApiError');
 const  isValidSession =  require('../middleware/isValidSession');
 const mongoose = require('mongoose');
+const jitsiToken = require('../services/jiti-token-generation');
 
 const router = express.Router();
 
@@ -61,7 +62,7 @@ router.get('/',isValidSession,
 );
 
 router.get('/:id',
-  isValidSession,
+
   catchAsync(async (req, res) => {
 
 
@@ -69,9 +70,12 @@ router.get('/:id',
       return res.status(httpStatus.BAD_REQUEST).send("room not found");
     }
 
-
-    await Room.findById(req.params.id).exec()
+    await Room.findById(req.params.id).populate("author").lean().exec()
       .then((room) => {
+
+        room.jwt_token = jitsiToken.generate(room.author.username, "*");
+        room.author.password ="";
+
         res.status(200).json(room)
       })
       .catch(err => {
