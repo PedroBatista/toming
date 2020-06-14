@@ -1,6 +1,7 @@
 const express = require('express');
 const authRouter = require('./auth.route');
 const usersRouter = require('./users');
+const roomsRouter = require('./rooms');
 const {User, Room} = require("../database/models");
 const jitsiToken = require('../services/jiti-token-generation');
 
@@ -8,6 +9,7 @@ const router = express.Router();
 
 router.use('/auth', authRouter);
 router.use('/users', usersRouter);
+router.use('/rooms', roomsRouter);
 
 
 /* GET home page. */

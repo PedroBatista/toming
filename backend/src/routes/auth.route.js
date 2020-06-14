@@ -26,8 +26,6 @@ router.post('/register',
 
       const user = await User.create(userBody);
 
-      // TODO Auth
-
       res.status(httpStatus.CREATED).send(user);
     }
   )
