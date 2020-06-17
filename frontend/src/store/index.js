@@ -12,7 +12,3 @@ const store = new Vuex.Store({
 })
 
 export default store
-
-// Initialize the auth store.
-// TODO
-store.dispatch("auth/validate")

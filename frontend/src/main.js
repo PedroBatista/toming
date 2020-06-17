@@ -6,8 +6,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import LoadScript from 'vue-plugin-load-script'
-import ApiService from "./services/api.service"
-import {AuthService} from "./services/auth.service";
 
 Vue.config.productionTip = false
 

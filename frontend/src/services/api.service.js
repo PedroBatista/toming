@@ -1,10 +1,12 @@
 import axios from 'axios'
 import store from '../store'
 
+axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL
+
 const ApiService = {
-  init(baseURL) {
-    axios.defaults.baseURL = baseURL;
-  },
+  /*init(baseURL) {
+    axios.defaults.baseURL = baseURL
+  },*/
 
   get(resource) {
     return axios.get(resource)
