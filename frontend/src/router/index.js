@@ -5,6 +5,7 @@ import Login from '../views/Login'
 import Loading from '../views/Loading'
 import PageNotFound from '../views/PageNotFound'
 import Store from '../store'
+import Room from "../views/Room";
 
 Vue.use(VueRouter)
 
@@ -14,7 +15,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home,
     meta: {
       public: false,
@@ -22,7 +23,7 @@ const routes = [
   },
   {
     path: '/about',
-    name: 'About',
+    name: 'about',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -30,7 +31,7 @@ const routes = [
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: Login,
     meta: {
       public: true,  // Allow access to even if not logged in
@@ -39,13 +40,24 @@ const routes = [
   },
   {
     path: '/loading',
+    name: 'loading',
     component: Loading,
     meta: {
       public: true,
     }
   },
   {
+    path: '/room/:id',
+    name: 'room',
+    component: Room,
+    props: true,
+    meta: {
+      public: false,
+    }
+  },
+  {
     path: '*',
+    name: 'page-not-found',
     component: PageNotFound,
     meta: {
       public: true,

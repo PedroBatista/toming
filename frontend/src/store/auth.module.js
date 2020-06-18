@@ -38,14 +38,26 @@ const actions = {
       const response = await AuthService.login(email, password);
       commit('loginSuccess', {userDetails: response.user}) // TODO
 
+      this._vm.$bvToast.toast("Logged in successfully.", {
+        variant: "success",
+        title: 'SUCCESS',
+        autoHideDelay: 5000
+      })
+
       // Redirect the user to the page he first tried to visit or to the home view
-      router.push(router.history.current.query.redirect || '/');
+      router.push(router.history.current.query.redirect || '/')
 
       return true
     } catch (e) {
       if (e instanceof AuthenticationError) {
         commit('loginError', {errorCode: e.errorCode, errorMessage: e.message})
       }
+
+      this._vm.$bvToast.toast(e.message, {
+        variant: "danger",
+        title: 'ERROR',
+        autoHideDelay: 5000
+      })
 
       return false
     }

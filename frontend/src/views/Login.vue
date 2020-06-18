@@ -3,7 +3,7 @@
     <h1>Login</h1>
 
     <b-container>
-      <b-form @submit="onSubmit">
+      <b-form @submit.prevent="onSubmit">
         <b-form-group
           id="input-group-email"
           label="Email address:"
@@ -32,18 +32,14 @@
           />
         </b-form-group>
 
-        <p v-if="authenticationError">
-          {{ authenticationError }}
-        </p>
-
         <b-button
           type="submit"
           variant="primary"
           :disabled="authenticating"
         >
           <b-spinner
-            small
             v-if="authenticating"
+            small
           />
           Submit
         </b-button>
@@ -72,13 +68,9 @@
       ...mapActions('auth', [
         'login'
       ]),
-      onSubmit(event) {
-        event.preventDefault()
-        // Perform a simple validation that email and password have been typed in
-        //if (this.usernameOrEmail !== '' && this.password !== '') {
-          this.login({email: this.email, password: this.password})
-          this.password = ""
-        //}
+      async onSubmit() {
+        await this.login({email: this.email, password: this.password})
+        this.password = ""
       }
     }
   }

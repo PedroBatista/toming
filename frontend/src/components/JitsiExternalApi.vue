@@ -23,6 +23,7 @@
       this.$loadScript(process.env.VUE_APP_JITSI_EXTERNAL_API)
         .then(() => {
           this.scriptLoaded = true
+          this.start()
         })
         .catch(() => {
           // Failed to fetch script
