@@ -3,10 +3,9 @@
     <!-- TODO URGENT! CSS fill body height. -->
     <JitsiExternalApi
       v-if="room"
-      style="height: 720px;"
+      style="height: 100%;"
       :room-display-name="room.subject"
       :options="jistiOptions"
-      ref="jitsi"
     />
   </div>
 </template>
@@ -49,8 +48,8 @@
   }
 </script>
 
-<style scoped>
+<style>
   #room {
-
+    height: calc(100% - 76px);
   }
 </style>
