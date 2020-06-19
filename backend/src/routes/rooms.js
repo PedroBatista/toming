@@ -46,7 +46,7 @@ router.get('/:id',
     }
 
     const room = await Room.findById(req.params.id).lean().exec();
-    room.jwt_token = jitsiToken.generate(req.session.name, room._id);
+    room.jwt_token = jitsiToken.generate(req.session.user.name, room._id);
 
     return res.status(httpStatus.OK).json(room);
   })
