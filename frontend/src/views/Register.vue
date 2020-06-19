@@ -12,7 +12,7 @@
           <b-form-input
             id="input-name"
             v-model="name"
-            type="name"
+            type="text"
             required
             placeholder="Enter name"
           />
@@ -56,6 +56,14 @@
             small
           />
           Registar
+        </b-button>
+
+        <b-button
+          to="/login"
+          variant="primary"
+          class="float-right"
+        >
+          Login
         </b-button>
       </b-form>
     </b-container>

@@ -67,11 +67,24 @@ const actions = {
       const response = await AuthService.register(name, email, password)
       router.push("/login")
 
+      this._vm.$bvToast.toast("Successfully registered.", {
+        variant: "success",
+        title: 'SUCCESS',
+        autoHideDelay: 5000
+      })
+
       return true
     } catch (e) {
       if (e instanceof AuthenticationError) {
         commit('loginError', {errorCode: e.errorCode, errorMessage: e.message})
       }
+
+      this._vm.$bvToast.toast(e.message, {
+        variant: "danger",
+        title: 'ERROR',
+        autoHideDelay: 5000
+      })
+
       return false
     }
   },

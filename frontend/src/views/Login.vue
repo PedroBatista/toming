@@ -41,7 +41,15 @@
             v-if="authenticating"
             small
           />
-          Submit
+          Login
+        </b-button>
+
+        <b-button
+          to="/register"
+          variant="primary"
+          class="float-right"
+        >
+          Register
         </b-button>
       </b-form>
     </b-container>
