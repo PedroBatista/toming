@@ -74,6 +74,7 @@
         this.api.on('readyToClose', () => {
           this.api.dispose()
           this.onCall = false
+          this.$router.push('/')
         })
 
         this.onCall = true
