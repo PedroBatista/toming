@@ -32,7 +32,7 @@ router.post('/create',
 router.get('/',
   isValidSession,
   catchAsync(async (req, res) => {
-    const rooms = await Room.find({author: req.session.user}).exec();
+    const rooms = await Room.find(/*{author: req.session.user}*/).exec();
     return res.status(httpStatus.CREATED).json(rooms);
   })
 );
