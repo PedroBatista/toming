@@ -66,8 +66,9 @@
   import {mapActions, mapGetters} from "vuex";
 
   export default {
-    name: "Login",
+    name: "Register",
     data: () => ({
+      name: null,
       email: null,
       password: null
     }),
@@ -80,7 +81,7 @@
     },
     methods: {
       ...mapActions('auth', [
-        'login'
+        'register'
       ]),
       async onSubmit() {
         await this.register({name: this.name, email: this.email, password: this.password})
