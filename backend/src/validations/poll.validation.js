@@ -2,7 +2,10 @@ const Joi = require('@hapi/joi');
 
 const create = {
   body: Joi.object().keys({
-    subject: Joi.string().required()
+    question: Joi.string().required(),
+    questions: Joi.array().min(1).items(Joi.object().keys({
+      question: Joi.string().required()
+    })).required()
   })
 };
 
