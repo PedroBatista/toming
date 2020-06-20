@@ -1,4 +1,5 @@
 const Joi = require('@hapi/joi');
+const {objectId} = require('./custom.validation');
 
 const create = {
   body: Joi.object().keys({
@@ -9,7 +10,13 @@ const create = {
   })
 };
 
+const get = {
+  params: Joi.object().keys({
+    question: Joi.string().required().custom(objectId),
+  })
+}
 
 module.exports = {
-  create
+  create,
+  get
 };

@@ -37,6 +37,7 @@ router.get('/',
 
 router.get('/:question',
   isValidSession,
+  validate(pollValidation.get),
   catchAsync(async (req, res) => {
 
     if (await Poll.exists({_id: req.params.question}) === false) {
