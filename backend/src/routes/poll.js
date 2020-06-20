@@ -1,6 +1,6 @@
 const express = require('express');
 const httpStatus = require('http-status');
-const {Room} = require('../database/models');
+const {Poll} = require('../database/models');
 const validate = require('../middleware/validate');
 const pollValidation = require('../validations/poll.validation');
 const catchAsync = require('../utils/catchAsync');

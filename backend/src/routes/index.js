@@ -2,7 +2,7 @@ const express = require('express');
 const authRouter = require('./auth.route');
 const usersRouter = require('./users');
 const roomsRouter = require('./rooms');
-const poolsRouter = require('./poll');
+const pollsRouter = require('./poll');
 const {User, Room} = require("../database/models");
 const jitsiToken = require('../services/jiti-token-generation');
 
@@ -11,7 +11,7 @@ const router = express.Router();
 router.use('/auth', authRouter);
 router.use('/users', usersRouter);
 router.use('/rooms', roomsRouter);
-router.use('/pools', poolsRouter);
+router.use('/polls', pollsRouter);
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
