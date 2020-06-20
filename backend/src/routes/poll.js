@@ -14,19 +14,13 @@ router.post('/create',
   isValidSession,
   validate(pollValidation.create),
   catchAsync(async (req, res) => {
-    /*
-    const roomBody = req.body;
-    roomBody.author = req.session.user;
 
-    // TODO We should't care! (jitsi uses the mongo id)
-    if (await Room.exists({subject: roomBody.subject})) {
-      throw new ApiError(httpStatus.CONFLICT, "Room subject already used.");
-    }
+    const pollBody = req.body;
+    pollBody.author = req.session.user;
 
-    const room = await Room.create(roomBody);
+    const poll = await Poll.create(pollBody);
 
-    return res.status(httpStatus.CREATED).send(room);
-    */
+    return res.status(httpStatus.CREATED).send(poll);
   })
 );
 
