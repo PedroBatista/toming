@@ -43,7 +43,7 @@ router.get('/:question',
       throw new ApiError(httpStatus.NOT_FOUND, "Question not found!");
     }
 
-    const poll = await Pool.findById(req.params.question).lean().exec();
+    const poll = await Poll.findById(req.params.question).lean().exec();
 
     return res.status(httpStatus.OK).json(poll);
   })
