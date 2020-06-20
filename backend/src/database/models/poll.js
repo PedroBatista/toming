@@ -15,8 +15,8 @@ const poll = new Schema({
     type: Schema.Types.ObjectID,
     ref: "User"
   }],
-  questions: [{
-    question: String,
+  options: [{
+    option: String,
     vote_count: Number
   }],
   /*allowed_users: [{
