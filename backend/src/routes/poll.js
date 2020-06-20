@@ -28,10 +28,10 @@ router.post('/create',
 router.get('/',
   isValidSession,
   catchAsync(async (req, res) => {
-    /*
-    const rooms = await Room.find({author: req.session.user}).exec();
-    return res.status(httpStatus.CREATED).json(rooms);
-    */
+
+    const polls = await Poll.find().exec();
+    return res.status(httpStatus.CREATED).json(polls);
+
   })
 );
 
