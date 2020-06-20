@@ -75,14 +75,7 @@ router.get('/vote/:question/:option',
 
     option.vote_count = option.vote_count == undefined ? 1 : ++option.vote_count;
 
-    Poll.updateOne(poll, function (err, raw) {
-      if (err) {
-        console.log('Error log: ' + err)
-      } else {
-        console.log("Token updated: " + raw);
-        console.log(raw);
-      }
-    });
+    Poll.updateOne(poll);
 
     return res.status(httpStatus.OK).json(poll);
   })
