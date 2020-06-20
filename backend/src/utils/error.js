@@ -10,6 +10,13 @@ const handleError = (err, res) => {
       message
     });
   }
+  else if (err.name === "NotFoundError") {
+    res.status(httpStatus.NOT_FOUND).json({
+      status: "error",
+      statusCode: httpStatus.NOT_FOUND,
+      message: err.message
+    });
+  }
   else {
     console.log(err.stack);
     res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
