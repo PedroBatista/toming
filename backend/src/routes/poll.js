@@ -26,7 +26,7 @@ router.post('/create',
 
 // List all polls.
 router.get('/',
-  isValidSession,
+  //isValidSession,
   catchAsync(async (req, res) => {
 
     const polls = await Poll.find().exec();
@@ -39,7 +39,7 @@ router.get('/:question',
   isValidSession,
   catchAsync(async (req, res) => {
 
-    if (await Poll.exists({question: req.params.question}) === false) {
+    if (await Poll.exists({_id: req.params.question}) === false) {
       throw new ApiError(httpStatus.NOT_FOUND, "Question not found!");
     }
 
