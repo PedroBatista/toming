@@ -58,7 +58,7 @@ router.get('/vote/:question/:option',
       throw new ApiError(httpStatus.NOT_FOUND, "Question not found!");
     }
 
-    const poll = await Poll.findById(req.params.question).lean().exec();
+    const poll = await Poll.findById(req.params.question).exec();
 
     const option = poll.options.find(o => o._id == req.params.option);
 
@@ -66,13 +66,23 @@ router.get('/vote/:question/:option',
       throw new ApiError(httpStatus.NOT_FOUND, "Option not found!");
 
     const user = req.session.user;
-    //poll.already_voted_users.includes(user);
+
+    const alreadyVoted = await Poll.exists({ _id: poll._id, already_voted_users: user._id });
+    if (alreadyVoted)
+      throw new ApiError(httpStatus.PAYMENT_REQUIRED, "You have already voted! Go away!");
 
     poll.already_voted_users.push(user);
 
-    option.vote_count = option.vote_count == undefined ? 1 : option.vote_count++;
+    option.vote_count = option.vote_count == undefined ? 1 : ++option.vote_count;
 
-    Poll.update(poll);
+    Poll.updateOne(poll, function (err, raw) {
+      if (err) {
+        console.log('Error log: ' + err)
+      } else {
+        console.log("Token updated: " + raw);
+        console.log(raw);
+      }
+    });
 
     return res.status(httpStatus.OK).json(poll);
   })
