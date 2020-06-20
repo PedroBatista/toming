@@ -26,7 +26,7 @@ router.post('/create',
 
 // List all polls.
 router.get('/',
-  //isValidSession,
+  isValidSession,
   catchAsync(async (req, res) => {
 
     const polls = await Poll.find().exec();
