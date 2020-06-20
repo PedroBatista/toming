@@ -61,8 +61,6 @@ const AuthService = {
     }
   },
   validate: async function () {
-    // TODO validate authentication
-
     try {
       const response = await ApiService.get("/auth/session")
 

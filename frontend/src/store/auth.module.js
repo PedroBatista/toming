@@ -65,7 +65,10 @@ const actions = {
   async register({commit}, {name, email, password}) {
     try {
       const response = await AuthService.register(name, email, password)
-      router.push("/login")
+      router.push({
+        name: "login",
+        query: {redirect: router.history.current.query.redirect}
+      })
 
       this._vm.$bvToast.toast("Successfully registered.", {
         variant: "success",
