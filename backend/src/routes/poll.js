@@ -50,20 +50,31 @@ router.get('/:question',
 );
 
 
-router.get('/vote/:id',
+router.get('/vote/:question/:option',
   isValidSession,
   catchAsync(async (req, res) => {
 
-    /*
-    if (await Room.exists({_id: req.params.id}) === false) {
-      throw new ApiError(httpStatus.NOT_FOUND, "Room not found!");
+    if (await Poll.exists({_id: req.params.question}) === false) {
+      throw new ApiError(httpStatus.NOT_FOUND, "Question not found!");
     }
 
-    const room = await Room.findById(req.params.id).lean().exec();
-    room.jwt_token = jitsiToken.generate(req.session.name, room._id);
+    const poll = await Poll.findById(req.params.question).lean().exec();
 
-    return res.status(httpStatus.OK).json(room);
-    */
+    const option = poll.options.find(o => o._id == req.params.option);
+
+    if (option == undefined)
+      throw new ApiError(httpStatus.NOT_FOUND, "Option not found!");
+
+    const user = req.session.user;
+    //poll.already_voted_users.includes(user);
+
+    poll.already_voted_users.push(user);
+
+    option.vote_count = option.vote_count == undefined ? 1 : option.vote_count++;
+
+    Poll.update(poll);
+
+    return res.status(httpStatus.OK).json(poll);
   })
 );
 
