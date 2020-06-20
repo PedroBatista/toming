@@ -35,20 +35,17 @@ router.get('/',
   })
 );
 
-router.get('/:id',
+router.get('/:question',
   isValidSession,
   catchAsync(async (req, res) => {
 
-    /*
-    if (await Room.exists({_id: req.params.id}) === false) {
-      throw new ApiError(httpStatus.NOT_FOUND, "Room not found!");
+    if (await Poll.exists({question: req.params.question}) === false) {
+      throw new ApiError(httpStatus.NOT_FOUND, "Question not found!");
     }
 
-    const room = await Room.findById(req.params.id).lean().exec();
-    room.jwt_token = jitsiToken.generate(req.session.name, room._id);
+    const poll = await Pool.findById(req.params.question).lean().exec();
 
-    return res.status(httpStatus.OK).json(room);
-    */
+    return res.status(httpStatus.OK).json(poll);
   })
 );
 
