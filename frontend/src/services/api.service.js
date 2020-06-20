@@ -52,7 +52,7 @@ const ApiService = {
         return response
       },
       async (error) => {
-        if (error.request.status == 401 && error.config.url.includes('/auth/login')) {
+        if (error.request.status == 401/* && error.config.url.includes('/auth/login')*/) {
           // Logout the user
           await store.dispatch('auth/logout')
           return

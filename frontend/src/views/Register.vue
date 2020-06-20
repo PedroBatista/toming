@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Registo</h1>
+    <h1 class="text-center">Registo</h1>
 
     <b-container>
       <b-form @submit.prevent="onSubmit">
@@ -59,9 +59,9 @@
         </b-button>
 
         <b-button
-          to="/login"
           variant="primary"
           class="float-right"
+          @click="sendToLogin"
         >
           Login
         </b-button>
@@ -94,6 +94,17 @@
       async onSubmit() {
         await this.register({name: this.name, email: this.email, password: this.password})
         this.password = ""
+      },
+      sendToLogin() {
+        if (this.$router.history.current.query.redirect)
+          this.$router.push({
+            name: "login",
+            query: {redirect: this.$router.history.current.query.redirect}
+          })
+        else
+          this.$router.push({
+            name: "login"
+          })
       }
     }
   }

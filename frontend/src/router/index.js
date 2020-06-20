@@ -5,8 +5,8 @@ import Login from '../views/Login'
 import Loading from '../views/Loading'
 import PageNotFound from '../views/PageNotFound'
 import Store from '../store'
-import Room from "../views/Room";
-import Register from "../views/Register";
+import Room from "../views/Room"
+import Register from "../views/Register"
 
 Vue.use(VueRouter)
 
@@ -82,8 +82,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  // TODO
-  //debugger
   let validating = Store.getters["auth/validating"]
   if (validating && to.path != '/loading')
     return next({
