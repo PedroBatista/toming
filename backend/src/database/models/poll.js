@@ -25,6 +25,7 @@ const poll = new Schema({
   }]*/
 });
 
+
 //Set any options for the schema
 const options = {
   timestamps: true
