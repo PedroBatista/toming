@@ -7,6 +7,7 @@ import PageNotFound from '../views/PageNotFound'
 import Store from '../store'
 import Room from "../views/Room"
 import Register from "../views/Register"
+import Poll from "../views/Poll"
 
 Vue.use(VueRouter)
 
@@ -63,6 +64,14 @@ const routes = [
     props: true,
     meta: {
       public: false,
+    }
+  },
+  {
+    path: '/',
+    name: 'poll',
+    component: Poll,
+    meta: {
+      public: true,
     }
   },
   {
