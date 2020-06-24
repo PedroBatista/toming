@@ -1,5 +1,5 @@
 <template>
-    <div class="poll">
+    <div class="vue-poll">
         <h3 class="qst" v-html="question"></h3>
         <div class="ans-cnt">
             <div v-for="(a,index) in calcAnswers" :key="index" :class="{ ans: true, [a.custom_class]: (a.custom_class) }">
@@ -37,7 +37,7 @@
 
 <script>
 
-    export default {
+    export default{
         name: 'Poll',
         props: {
             question: {
