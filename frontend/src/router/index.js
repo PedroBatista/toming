@@ -67,11 +67,11 @@ const routes = [
     }
   },
   {
-    path: '/',
+    path: '/room/:id/poll',
     name: 'poll',
     component: Poll,
     meta: {
-      public: true,
+      public: false,
     }
   },
   {
