@@ -37,7 +37,7 @@
 
 <script>
 
-    export default{
+    export default {
         name: 'Poll',
         props: {
             question: {
