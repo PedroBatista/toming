@@ -1,33 +1,45 @@
 <template>
-    <div>
-        <Poll v-bind="options" @addvote="addVote"/>
-    </div>
+  <div>
+    <Poll v-bind="options" @addvote="addVote" />
+    {{poll}}
+  </div>
 </template>
 
-<script> 
- import Poll from "../components/Poll";
-    export default {        
-    name: 'PollView',
-    components: {
-        Poll
-    },
-        data() {
-            return {
-                options: {
-                    question: 'What\'s your favourite <strong>JS</strong> framework?',
-                    answers: [
-                        { value: 1, text: 'Vue', votes: 53 },
-                        { value: 2, text: 'React', votes: 35 },
-                        { value: 3, text: 'Angular', votes: 30 },
-                        { value: 4, text: 'Other', votes: 10 } 
-                    ]
-                }
-            }
-        },
-        methods: {
-            addVote(obj){
-                console.log('You voted ' + obj.value + '!');
-            }
-        }
+<script>
+import Poll from "../components/Poll";
+import ApiService from "../services/api.service";
+export default {
+  name: "PollView",
+  props: {
+    id: {
+      type: String,
+      required: true
     }
+  },
+  components: {
+    Poll
+  },
+  data() {
+    return {
+        poll: {},
+
+      options: {
+        question: "",
+        answers: []
+      }
+    };
+  },
+      async created() {
+      const response = await ApiService.get("/polls/" + this.id)
+      this.poll = response.data
+      this.options.question = this.poll.question
+      this.options.answers = this.poll.options
+  
+    },
+  methods: {
+    addVote(obj) {
+      console.log("You voted " + obj.value + "!");
+    }
+  }
+};
 </script>

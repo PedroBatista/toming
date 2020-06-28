@@ -37,14 +37,14 @@
 
 <script>
 
-    export default{
+    export default {
         name: 'Poll',
         props: {
             question: {
                 type: String,
                 required: true
             },
-            answers: {
+            options: {
                 type: Array,
                 required: true
             },
