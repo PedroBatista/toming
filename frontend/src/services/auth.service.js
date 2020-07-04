@@ -52,7 +52,7 @@ const AuthService = {
   logout: async function () {
     try {
       const response = await ApiService.get("/auth/logout")
-
+      localStorage.removeItem('pollSelected')
       ApiService.unmount401Interceptor()
 
       return response.data

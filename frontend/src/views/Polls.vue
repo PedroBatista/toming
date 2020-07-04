@@ -14,7 +14,7 @@
           />
         </b-form-group>
         <b-list-group>
-          <b-list-group-item v-for="r in options" :key="r">{{ r }}</b-list-group-item>
+          <b-list-group-item v-for="(r,index) in options" :key="index">{{ r }}</b-list-group-item>
         </b-list-group>
         <b-form-group id="input-group-answer" label="answers:" label-for="input-answer">
           <b-input-group>
@@ -36,9 +36,9 @@
       
     <b-list-group>
       <b-list-group-item
-        v-for="r in polls"
-        :key="r"  
-        :to="{ name: 'poll', params: { id: r._id }}"   
+        v-for="(r,index) in polls"
+        :key="index"          
+        @click="pollDetail(r)"   
       >
         {{ r.question }}
       </b-list-group-item>
@@ -67,9 +67,15 @@ export default {
     createAnswer() {
       this.options.push(this.option);
       this.option = "";
+
       
     },
 
+pollDetail(poll){
+  localStorage.setItem('pollSelected',JSON.stringify(poll));
+  this.$router.push({name:'poll', params:{id:poll._id}})
+  
+},
     async createPoll() {
       try {
      

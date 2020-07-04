@@ -1,9 +1,9 @@
 <template>
     <div class="vue-poll">
-        <h3 class="qst" v-html="question"></h3>
+        <h3 class="qst" v-html="pollSelected.question"></h3>
         <div class="ans-cnt">
-            <div v-for="(a,index) in calcAnswers" :key="index" :class="{ ans: true, [a.custom_class]: (a.custom_class) }">
-                
+            <div v-for="(a,index) in pollSelected.options" :key="index">
+   <!--             
                 <template v-if="!finalResults">
                     
                     <div v-if="!visibleResults" :class="{ 'ans-no-vote noselect': true, active: a.selected }" @click.prevent="handleVote(a)" >
@@ -16,11 +16,11 @@
 
                     <span class="bg" :style="{ width: visibleResults ? a.percent : '0%' }"></span>
                 </template>
-                <template v-else>
-                    <div class="ans-voted final">
-                        <span v-if="a.percent" class="percent" v-text="a.percent"></span>                  
-                        <span class="txt" v-html="a.text"></span>                                       
-                    </div>
+                -->
+                <template>
+                    <div class="ans-voted final">                                    
+                        <span class="txt" v-html="a.option" @click="selectedOption"></span>                                       
+                    </div> 
                     <span :class="{ bg: true, selected: mostVotes == a.votes }" :style="{ width: a.percent }"></span>
                 </template>
                 
@@ -40,12 +40,9 @@
     export default {
         name: 'Poll',
         props: {
-            question: {
-                type: String,
-                required: true
-            },
-            options: {
-                type: Array,
+         
+            pollSelected: {
+                type: Object,
                 required: true
             },
             showResults: {
@@ -78,10 +75,16 @@
                 visibleResults: JSON.parse(this.showResults)
             }
         },
-        computed: {           
+
+        created(){
+            
+console.log(this.pollSelected);
+        },
+        computed: {   
+            
             totalVotes(){
                 let totalVotes = 0
-                this.answers.filter(a=>{
+                this.pollSelected.options.filter(a=>{
                     if (!isNaN(a.votes) && a.votes > 0)
                         totalVotes += parseInt(a.votes)
                 })
@@ -92,7 +95,7 @@
             },
             mostVotes(){
                 let max = 0
-                this.answers.filter(a=>{
+                this.pollSelected.options.filter(a=>{
                     if (!isNaN(a.votes) && a.votes > 0 && a.votes >= max)
                         max = a.votes
                 })
@@ -100,15 +103,15 @@
                 return max
             },
             calcAnswers(){
-                               
+                          
                 if (this.totalVotes === 0)
-                    return this.answers.map(a=>{
+                    return this.pollSelected.options.map(a=>{
                         a.percent = '0%'
                         return a
                     })                    
                 
                 //Calculate percent
-                return this.answers.filter(a=>{
+                return this.pollSelected.options.filter(a=>{
                     if (!isNaN(a.votes) && a.votes > 0)
                         a.percent = ( Math.round( (parseInt(a.votes)/this.totalVotes ) * 100) ) + '%'
                     else
@@ -122,6 +125,11 @@
             }
         },
         methods: {
+        selectedOption(){
+        //TODO SELECT OPTION AND PERSIST db AND INSCREMENT VOTE 
+    
+        },
+
             handleMultiple(){
                 
                 let arSelected = []

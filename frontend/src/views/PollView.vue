@@ -1,7 +1,6 @@
 <template>
   <div>
-    <Poll v-bind="options" @addvote="addVote" />
-    {{poll}}
+    <Poll :pollSelected="pollSelected" @addvote="addVote" />
   </div>
 </template>
 
@@ -10,32 +9,15 @@ import Poll from "../components/Poll";
 import ApiService from "../services/api.service";
 export default {
   name: "PollView",
-  props: {
-    id: {
-      type: String,
-      required: true
-    }
-  },
+
   components: {
     Poll
   },
   data() {
     return {
-        poll: {},
-
-      options: {
-        question: "",
-        answers: []
-      }
+      pollSelected: JSON.parse(localStorage.getItem('pollSelected'))
     };
   },
-      async created() {
-      const response = await ApiService.get("/polls/" + this.id)
-      this.poll = response.data
-      this.options.question = this.poll.question
-      this.options.answers = this.poll.options
-  
-    },
   methods: {
     addVote(obj) {
       console.log("You voted " + obj.value + "!");

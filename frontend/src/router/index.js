@@ -71,13 +71,12 @@ const routes = [
     path: '/poll/:id',
     name: 'poll',
     component: PollView,
-    props: true,
     meta: {
       public: false,
     }
   },
   {
-    path: '/poll',
+    path: '/polls',
     name: 'polls',
     component: Polls,
     meta: {
