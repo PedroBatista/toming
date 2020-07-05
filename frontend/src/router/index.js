@@ -71,6 +71,7 @@ const routes = [
     path: '/poll/:id',
     name: 'poll',
     component: PollView,
+    props: true,
     meta: {
       public: false,
     }

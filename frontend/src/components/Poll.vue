@@ -1,9 +1,9 @@
 <template>
     <div class="vue-poll">
-        <h3 class="qst" v-html="question"></h3>
+        <h3 class="qst" v-html="options.question"></h3>
         <div class="ans-cnt">
-            <div v-for="(a,index) in calcAnswers" :key="index" :class="{ ans: true, [a.custom_class]: (a.custom_class) }">
-                
+            <div v-for="(a,index) in options.answers" :key="index">
+   <!--             
                 <template v-if="!finalResults">
                     
                     <div v-if="!visibleResults" :class="{ 'ans-no-vote noselect': true, active: a.selected }" @click.prevent="handleVote(a)" >
@@ -16,12 +16,12 @@
 
                     <span class="bg" :style="{ width: visibleResults ? a.percent : '0%' }"></span>
                 </template>
-                <template v-else>
-                    <div class="ans-voted final">
-                        <span v-if="a.percent" class="percent" v-text="a.percent"></span>                  
-                        <span class="txt" v-html="a.text"></span>                                       
-                    </div>
-                    <span :class="{ bg: true, selected: mostVotes == a.votes }" :style="{ width: a.percent }"></span>
+                -->
+                <template>
+                    <div class="ans-voted final">                                    
+                        <span class="txt" v-html="a.option" @click="selectedOption"></span>                                       
+                    </div> 
+                    <!-- <span :class="{ bg: true, selected: mostVotes == a.votes }" :style="{ width: a.percent }"></span>  -->
                 </template>
                 
             </div>
@@ -37,14 +37,14 @@
 
 <script>
 
-    export default{
+    export default {
         name: 'Poll',
         props: {
             question: {
                 type: String,
                 required: true
             },
-            answers: {
+            options: {
                 type: Array,
                 required: true
             },
@@ -122,6 +122,10 @@
             }
         },
         methods: {
+                 selectedOption(){
+        //TODO SELECT OPTION AND PERSIST db AND INSCREMENT VOTE 
+    
+        },
             handleMultiple(){
                 
                 let arSelected = []
