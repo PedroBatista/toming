@@ -14,7 +14,7 @@
           />
         </b-form-group>
         <b-list-group>
-          <b-list-group-item v-for="r in options" :key="r">{{ r }}</b-list-group-item>
+          <b-list-group-item v-for="(r,index) in options" :key="index">{{ r }}</b-list-group-item>
         </b-list-group>
         <b-form-group id="input-group-answer" label="answers:" label-for="input-answer">
           <b-input-group>

@@ -1,7 +1,6 @@
 <template>
   <div>
     <Poll :options="options" @addvote="addVote" />
- 
   </div>
 </template>
 

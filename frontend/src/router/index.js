@@ -77,7 +77,7 @@ const routes = [
     }
   },
   {
-    path: '/poll',
+    path: '/polls',
     name: 'polls',
     component: Polls,
     meta: {

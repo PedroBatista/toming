@@ -1,8 +1,14 @@
 <template>
     <div class="vue-poll">
+<<<<<<< HEAD
         <h3 class="qst" v-html="options.question"></h3>
         <div class="ans-cnt">
             <div v-for="(a,index) in options.answers" :key="index">
+=======
+        <h3 class="qst" v-html="pollSelected.question"></h3>
+        <div class="ans-cnt">
+            <div v-for="(a,index) in pollSelected.options" :key="index">
+>>>>>>> 4992850a64bc8c8a1ff108f1659e0a7203267de1
    <!--             
                 <template v-if="!finalResults">
                     
@@ -21,7 +27,11 @@
                     <div class="ans-voted final">                                    
                         <span class="txt" v-html="a.option" @click="selectedOption"></span>                                       
                     </div> 
+<<<<<<< HEAD
                     <!-- <span :class="{ bg: true, selected: mostVotes == a.votes }" :style="{ width: a.percent }"></span>  -->
+=======
+                    <span :class="{ bg: true, selected: mostVotes == a.votes }" :style="{ width: a.percent }"></span>
+>>>>>>> 4992850a64bc8c8a1ff108f1659e0a7203267de1
                 </template>
                 
             </div>
@@ -40,12 +50,18 @@
     export default {
         name: 'Poll',
         props: {
+<<<<<<< HEAD
             question: {
                 type: String,
                 required: true
             },
             options: {
                 type: Array,
+=======
+         
+            pollSelected: {
+                type: Object,
+>>>>>>> 4992850a64bc8c8a1ff108f1659e0a7203267de1
                 required: true
             },
             showResults: {
@@ -78,10 +94,16 @@
                 visibleResults: JSON.parse(this.showResults)
             }
         },
-        computed: {           
+
+        created(){
+            
+console.log(this.pollSelected);
+        },
+        computed: {   
+            
             totalVotes(){
                 let totalVotes = 0
-                this.answers.filter(a=>{
+                this.pollSelected.options.filter(a=>{
                     if (!isNaN(a.votes) && a.votes > 0)
                         totalVotes += parseInt(a.votes)
                 })
@@ -92,7 +114,7 @@
             },
             mostVotes(){
                 let max = 0
-                this.answers.filter(a=>{
+                this.pollSelected.options.filter(a=>{
                     if (!isNaN(a.votes) && a.votes > 0 && a.votes >= max)
                         max = a.votes
                 })
@@ -100,15 +122,15 @@
                 return max
             },
             calcAnswers(){
-                               
+                          
                 if (this.totalVotes === 0)
-                    return this.answers.map(a=>{
+                    return this.pollSelected.options.map(a=>{
                         a.percent = '0%'
                         return a
                     })                    
                 
                 //Calculate percent
-                return this.answers.filter(a=>{
+                return this.pollSelected.options.filter(a=>{
                     if (!isNaN(a.votes) && a.votes > 0)
                         a.percent = ( Math.round( (parseInt(a.votes)/this.totalVotes ) * 100) ) + '%'
                     else
@@ -122,10 +144,18 @@
             }
         },
         methods: {
+<<<<<<< HEAD
                  selectedOption(){
         //TODO SELECT OPTION AND PERSIST db AND INSCREMENT VOTE 
     
         },
+=======
+        selectedOption(){
+        //TODO SELECT OPTION AND PERSIST db AND INSCREMENT VOTE 
+    
+        },
+
+>>>>>>> 4992850a64bc8c8a1ff108f1659e0a7203267de1
             handleMultiple(){
                 
                 let arSelected = []
