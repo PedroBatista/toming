@@ -1,14 +1,8 @@
 <template>
     <div class="vue-poll">
-<<<<<<< HEAD
         <h3 class="qst" v-html="options.question"></h3>
         <div class="ans-cnt">
             <div v-for="(a,index) in options.answers" :key="index">
-=======
-        <h3 class="qst" v-html="pollSelected.question"></h3>
-        <div class="ans-cnt">
-            <div v-for="(a,index) in pollSelected.options" :key="index">
->>>>>>> 4992850a64bc8c8a1ff108f1659e0a7203267de1
    <!--             
                 <template v-if="!finalResults">
                     
@@ -27,11 +21,7 @@
                     <div class="ans-voted final">                                    
                         <span class="txt" v-html="a.option" @click="selectedOption"></span>                                       
                     </div> 
-<<<<<<< HEAD
                     <!-- <span :class="{ bg: true, selected: mostVotes == a.votes }" :style="{ width: a.percent }"></span>  -->
-=======
-                    <span :class="{ bg: true, selected: mostVotes == a.votes }" :style="{ width: a.percent }"></span>
->>>>>>> 4992850a64bc8c8a1ff108f1659e0a7203267de1
                 </template>
                 
             </div>
@@ -50,18 +40,12 @@
     export default {
         name: 'Poll',
         props: {
-<<<<<<< HEAD
             question: {
                 type: String,
                 required: true
             },
             options: {
                 type: Array,
-=======
-         
-            pollSelected: {
-                type: Object,
->>>>>>> 4992850a64bc8c8a1ff108f1659e0a7203267de1
                 required: true
             },
             showResults: {
@@ -144,18 +128,10 @@ console.log(this.pollSelected);
             }
         },
         methods: {
-<<<<<<< HEAD
-                 selectedOption(){
-        //TODO SELECT OPTION AND PERSIST db AND INSCREMENT VOTE 
-    
-        },
-=======
         selectedOption(){
         //TODO SELECT OPTION AND PERSIST db AND INSCREMENT VOTE 
     
         },
-
->>>>>>> 4992850a64bc8c8a1ff108f1659e0a7203267de1
             handleMultiple(){
                 
                 let arSelected = []
