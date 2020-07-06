@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1 class="text-center">Login</h1>
+    <h1 class="text-center">
+      Login
+    </h1>
 
     <b-container>
       <b-form @submit.prevent="onSubmit">
@@ -14,7 +16,7 @@
             v-model="email"
             type="email"
             required
-            placeholder="Enter email"
+            placeholder="Enter your email"
           />
         </b-form-group>
 
@@ -28,7 +30,7 @@
             v-model="password"
             type="password"
             required
-            placeholder="Enter password"
+            placeholder="Enter your password"
           />
         </b-form-group>
 
