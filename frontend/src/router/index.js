@@ -33,15 +33,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/register',
-    name: 'register',
-    component: Register,
-    meta: {
-      public: true,  // Allow access to even if not logged in
-      onlyWhenLoggedOut: true
-    }
-  },
-  {
     path: '/login',
     name: 'login',
     component: Login,
@@ -51,11 +42,12 @@ const routes = [
     }
   },
   {
-    path: '/loading',
-    name: 'loading',
-    component: Loading,
+    path: '/register',
+    name: 'register',
+    component: Register,
     meta: {
-      public: true,
+      public: true,  // Allow access to even if not logged in
+      onlyWhenLoggedOut: true
     }
   },
   {
@@ -63,6 +55,14 @@ const routes = [
     name: 'room',
     component: Room,
     props: true,
+    meta: {
+      public: false,
+    }
+  },
+  {
+    path: '/polls',
+    name: 'polls',
+    component: Polls,
     meta: {
       public: false,
     }
@@ -77,11 +77,11 @@ const routes = [
     }
   },
   {
-    path: '/polls',
-    name: 'polls',
-    component: Polls,
+    path: '/loading',
+    name: 'loading',
+    component: Loading,
     meta: {
-      public: false,
+      public: true,
     }
   },
   {
