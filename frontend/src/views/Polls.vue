@@ -45,7 +45,6 @@
     },
     methods: {
       pollCreated(pool) {
-        console.log(pool)
         this.polls.push(pool)
       }
     }
