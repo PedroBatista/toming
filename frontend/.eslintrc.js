@@ -13,8 +13,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-unused-vars': 'off',
     'vue/no-unused-components': 'off',
-    'sed-labels': 'off',
-    'no-unused-labels': 'off',
+    /*'sed-labels': 'off',
+    'no-unused-labels': 'off',*/
   },
   parserOptions: {
     parser: 'babel-eslint'
