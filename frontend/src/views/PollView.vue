@@ -1,10 +1,14 @@
 <template>
   <div>
-    <Poll
-      :options="options"
-      :id="id"
-      @vote-submit="voteSubmit"
-    />
+    <b-container>
+      <Poll
+        v-if="poll"
+        :question="poll.question"
+        :options="poll.options"
+        :final-results="poll.already_voted"
+        @vote-submit="voteSubmit"
+      />
+    </b-container>
   </div>
 </template>
 
@@ -25,25 +29,33 @@
     },
     data() {
       return {
-        poll: {},
-
-        options: {
-          question: "",
-          answers: []
-        }
+        poll: undefined,
       };
     },
     async created() {
       const response = await ApiService.get("/polls/" + this.id)
-
       this.poll = response.data
-      this.options.question = this.poll.question
-      this.options.answers = this.poll.options
-
     },
     methods: {
-      voteSubmit(obj) {
-        console.log("You voted " + obj.value + "!");
+      async voteSubmit(opt) {
+        try {
+          const response = await ApiService.get('polls/' + this.id + '/vote/' + opt._id)
+
+          this.$bvToast.toast("You have successfully voted!", {
+            variant: "success",
+            title: "SUCCESS",
+            autoHideDelay: 5000
+          });
+
+          this.poll = response.data
+        } catch (error) {
+          console.log(error)
+          this.$bvToast.toast(error.response.data.message, {
+            variant: "danger",
+            title: "ERROR",
+            autoHideDelay: 5000
+          });
+        }
       }
     }
   };
