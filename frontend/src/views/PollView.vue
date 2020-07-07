@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Poll :options="options" @addvote="addVote" />
+    <Poll :options="options" :id="id" @addvote="addVote" />
+  
   </div>
 </template>
 
