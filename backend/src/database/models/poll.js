@@ -16,7 +16,7 @@ const poll = new Schema({
     ref: "User"
   }],
   options: [{
-    option: String,
+    text: String,
     vote_count: Number
   }],
   /*allowed_users: [{

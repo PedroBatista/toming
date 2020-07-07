@@ -5,7 +5,7 @@ const create = {
   body: Joi.object().keys({
     question: Joi.string().required(),
     options: Joi.array().min(2).items(Joi.object().keys({
-      option: Joi.string().required()
+      text: Joi.string().required()
     })).required()
   })
 };

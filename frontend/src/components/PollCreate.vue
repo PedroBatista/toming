@@ -41,7 +41,7 @@
                 v-for="(opt, index) in options"
                 :key="index"
               >
-                {{ opt.option }}
+                {{ opt.text }}
                 <b-btn-close @click="remOption(index)" />
               </b-list-group-item>
             </b-list-group>
@@ -101,7 +101,7 @@
         const trim = this.optionInput !== undefined ? this.optionInput.trim() : "";
         if (trim.length > 0) {
           this.options.push({
-            option: trim
+            text: trim
           })
 
           this.optionInput = undefined;
