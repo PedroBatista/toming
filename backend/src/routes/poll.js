@@ -76,7 +76,7 @@ router.get('/:id/vote/:optionId',
 
     option.vote_count = option.vote_count == undefined ? 1 : ++option.vote_count;
 
-    Poll.updateOne(poll);
+    await Poll.updateOne(poll);
 
     return res.status(httpStatus.OK).json(poll);
   })
