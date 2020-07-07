@@ -18,8 +18,8 @@
                 </template>
                 -->
                 <template>
-                    <div class="ans-voted final">                                    
-                        <span class="txt" v-html="a.option" @click="selectedOption"></span>                                       
+                    <div class="ans-no-vote" @click="selectedOption(a._id)">                                    
+                        <span class="txt" v-html="a.option"></span>                                       
                     </div> 
                     <!-- <span :class="{ bg: true, selected: mostVotes == a.votes }" :style="{ width: a.percent }"></span>  -->
                 </template>
@@ -36,10 +36,14 @@
 </template>
 
 <script>
-
+  import ApiService from "../services/api.service";
     export default {
         name: 'Poll',
         props: {
+            id: {
+            type: String,
+            required: true
+            },
             question: {
                 type: String,
                 required: true
@@ -128,7 +132,10 @@ console.log(this.pollSelected);
             }
         },
         methods: {
-        selectedOption(){
+       async selectedOption(_id){
+            console.log("entrei")        
+                 const response = await ApiService.get('polls/'+this.id+'/vote/'+_id);
+
         //TODO SELECT OPTION AND PERSIST db AND INSCREMENT VOTE 
     
         },
@@ -227,7 +234,9 @@ console.log(this.pollSelected);
         -webkit-transition: color .2s ease-in-out;
         -moz-transition: color .2s ease-in-out;
     }
-    
+    .teste{
+        border: #41b882;
+    }
     .vue-poll .ans-cnt .ans-no-vote.active{
         background: #77C7F7;
     }
