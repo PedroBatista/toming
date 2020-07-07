@@ -29,7 +29,7 @@ router.get('/',
   catchAsync(async (req, res) => {
 
     const polls = await Poll.find().select(["-options", "-already_voted_users"]).lean().exec();
-    return res.status(httpStatus.CREATED).json(polls);
+    return res.status(httpStatus.OK).json(polls);
 
   })
 );

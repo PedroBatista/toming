@@ -33,7 +33,7 @@ router.get('/',
   isValidSession,
   catchAsync(async (req, res) => {
     const rooms = await Room.find(/*{author: req.session.user}*/).exec();
-    return res.status(httpStatus.CREATED).json(rooms);
+    return res.status(httpStatus.OK).json(rooms);
   })
 );
 
