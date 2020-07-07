@@ -45,6 +45,9 @@ router.get('/:id',
 
     const poll = await Poll.findById(req.params.id).lean().exec();
 
+    const user = req.session.user;
+    poll.already_voted = await hasAlreadyVoted(poll, user);
+
     return res.status(httpStatus.OK).json(poll);
   })
 );
@@ -68,7 +71,7 @@ router.get('/:id/vote/:optionId',
 
     const user = req.session.user;
 
-    const alreadyVoted = await Poll.exists({_id: poll._id, already_voted_users: user._id});
+    const alreadyVoted = await hasAlreadyVoted(poll, user);
     if (alreadyVoted)
       throw new ApiError(httpStatus.PAYMENT_REQUIRED, "You have already voted! Go away!");
 
@@ -78,8 +81,13 @@ router.get('/:id/vote/:optionId',
 
     await Poll.updateOne(poll);
 
-    return res.status(httpStatus.OK).json(poll);
+    const pollObj = poll.toObject();
+    pollObj.already_voted = true;
+
+    return res.status(httpStatus.OK).json(pollObj);
   })
 );
+
+const hasAlreadyVoted = async (poll, user) => await Poll.exists({_id: poll._id, already_voted_users: user._id});
 
 module.exports = router;
