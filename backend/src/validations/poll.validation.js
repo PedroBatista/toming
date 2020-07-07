@@ -12,11 +12,19 @@ const create = {
 
 const get = {
   params: Joi.object().keys({
-    question: Joi.string().required().custom(objectId),
+    id: Joi.string().required().custom(objectId),
+  })
+}
+
+const vote = {
+  params: Joi.object().keys({
+    id: Joi.string().required().custom(objectId),
+    optionId: Joi.string().required().custom(objectId),
   })
 }
 
 module.exports = {
   create,
-  get
+  get,
+  vote
 };

@@ -6,7 +6,6 @@ const pollValidation = require('../validations/poll.validation');
 const catchAsync = require('../utils/catchAsync');
 const ApiError = require('../utils/ApiError');
 const isValidSession = require('../middleware/isValidSession');
-const jitsiToken = require('../services/jiti-token-generation');
 
 const router = express.Router();
 
@@ -29,46 +28,47 @@ router.get('/',
   isValidSession,
   catchAsync(async (req, res) => {
 
-    const polls = await Poll.find().exec();
+    const polls = await Poll.find().select(["-options", "-already_voted_users"]).lean().exec();
     return res.status(httpStatus.CREATED).json(polls);
 
   })
 );
 
-router.get('/:question',
+router.get('/:id',
   isValidSession,
   validate(pollValidation.get),
   catchAsync(async (req, res) => {
 
-    if (await Poll.exists({_id: req.params.question}) === false) {
-      throw new ApiError(httpStatus.NOT_FOUND, "Question not found!");
+    if (await Poll.exists({_id: req.params.id}) === false) {
+      throw new ApiError(httpStatus.NOT_FOUND, "Poll not found!");
     }
 
-    const poll = await Poll.findById(req.params.question).lean().exec();
+    const poll = await Poll.findById(req.params.id).lean().exec();
 
     return res.status(httpStatus.OK).json(poll);
   })
 );
 
 
-router.get('/vote/:question/:option',
+router.get('/:id/vote/:optionId',
   isValidSession,
+  validate(pollValidation.vote),
   catchAsync(async (req, res) => {
 
-    if (await Poll.exists({_id: req.params.question}) === false) {
-      throw new ApiError(httpStatus.NOT_FOUND, "Question not found!");
+    if (await Poll.exists({_id: req.params.id}) === false) {
+      throw new ApiError(httpStatus.NOT_FOUND, "Poll not found!");
     }
 
-    const poll = await Poll.findById(req.params.question).exec();
+    const poll = await Poll.findById(req.params.id).exec();
 
-    const option = poll.options.find(o => o._id == req.params.option);
+    const option = poll.options.find(o => o._id == req.params.optionId);
 
     if (option == undefined)
       throw new ApiError(httpStatus.NOT_FOUND, "Option not found!");
 
     const user = req.session.user;
 
-    const alreadyVoted = await Poll.exists({ _id: poll._id, already_voted_users: user._id });
+    const alreadyVoted = await Poll.exists({_id: poll._id, already_voted_users: user._id});
     if (alreadyVoted)
       throw new ApiError(httpStatus.PAYMENT_REQUIRED, "You have already voted! Go away!");
 
