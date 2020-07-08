@@ -93,6 +93,8 @@ const hasAlreadyVoted = async (poll, user) => await Poll.exists({_id: poll._id, 
 let clients = [];
 
 router.get('/:id/events',
+  isValidSession,
+  validate(pollValidation.get),
   catchAsync(async (req, res) => {
 
     // Check if the pool exists
