@@ -52,7 +52,6 @@ router.get('/:id',
   })
 );
 
-
 router.get('/:id/vote/:optionId',
   isValidSession,
   validate(pollValidation.vote),
@@ -79,7 +78,7 @@ router.get('/:id/vote/:optionId',
 
     option.vote_count = option.vote_count == undefined ? 1 : ++option.vote_count;
 
-    await Poll.updateOne(poll);
+    await poll.save();
 
     const pollObj = poll.toObject();
     pollObj.already_voted = true;
