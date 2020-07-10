@@ -27,7 +27,7 @@
           to="/polls"
           v-if="loggedIn"
         >
-          Pools
+          Polls
         </b-nav-item>
       </b-navbar-nav>
 
