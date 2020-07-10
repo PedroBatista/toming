@@ -44,8 +44,8 @@
       this.polls = response.data;
     },
     methods: {
-      pollCreated(pool) {
-        this.polls.push(pool)
+      pollCreated(poll) {
+        this.polls.push(poll)
       }
     }
   };

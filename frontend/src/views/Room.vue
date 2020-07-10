@@ -1,6 +1,5 @@
 <template>
   <div id="room">
-    <!-- TODO URGENT! CSS fill body height. -->
     <JitsiExternalApi
       v-if="room"
       style="height: 100%;"

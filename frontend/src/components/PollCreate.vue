@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-button
-      v-b-modal.pool-create-modal
+      v-b-modal.poll-create-modal
       variant="success"
     >
       Create Pool
@@ -9,7 +9,7 @@
     </b-button>
 
     <b-modal
-      id="pool-create-modal"
+      id="poll-create-modal"
       title="Pool Creation"
       size="xl"
       scrollable
@@ -126,7 +126,7 @@
 
           this.clearModalInputs()
           this.$emit("poll-created", response.data)
-          this.$bvModal.hide("pool-create-modal")
+          this.$bvModal.hide("poll-create-modal")
 
         } catch (error) {
           console.log(error)
