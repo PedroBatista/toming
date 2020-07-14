@@ -4,13 +4,13 @@
       v-b-modal.poll-create-modal
       variant="success"
     >
-      Create Pool
+      Create Poll
       <b-icon-plus />
     </b-button>
 
     <b-modal
       id="poll-create-modal"
-      title="Pool Creation"
+      title="Poll Creation"
       size="xl"
       scrollable
       header-bg-variant="info"
@@ -72,7 +72,7 @@
           variant="success"
           class="float-right"
           block
-          @click="createPool"
+          @click="createPoll"
         >
           Create
         </b-button>
@@ -85,7 +85,7 @@
   import ApiService from "../services/api.service";
 
   export default {
-    name: "PoolCreate",
+    name: "PollCreate",
     data: () => ({
       question: undefined,
       options: [],
@@ -111,7 +111,7 @@
         this.options.splice(index, 1)
       },
 
-      async createPool() {
+      async createPoll() {
         try {
           const response = await ApiService.post("/polls/create", {
             question: this.question,
