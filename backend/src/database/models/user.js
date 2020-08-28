@@ -38,6 +38,8 @@ const userSchema = mongoose.Schema({
     avatar_photo: {
       //upload para MongoDB
 
+      //TODO !!!!
+
     },
   },
   {
