@@ -6,9 +6,6 @@
       :room-display-name="room.subject"
       :options="jistiOptions"
     />
-
-    <h1>TESTE</h1>
-
   </div>
 </template>
 
