@@ -22,7 +22,7 @@
     "morgan": "~1.9.1",
     "twig": "~0.10.3",
     "uuid-mongodb": "^2.3.0",
-    "validator": "13.0.0"
+    "validator": "13.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
